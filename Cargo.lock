@@ -3,14 +3,6 @@
 version = 3
 
 [[package]]
-name = "Aster"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "rand",
-]
-
-[[package]]
 name = "ab_glyph"
 version = "0.2.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -203,6 +195,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28bf19c1f0a470be5fbf7522a308a05df06610252c5bcf5143e1b23f629a9a03"
 dependencies = [
  "libloading",
+]
+
+[[package]]
+name = "aster"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "rand",
 ]
 
 [[package]]
