@@ -1,7 +1,9 @@
 use bevy::prelude::*;
+use game::GamePlugin;
 use menu::MenuPlugin;
 use ui::UiPlugin;
 
+mod game;
 mod menu;
 mod ui;
 
@@ -21,5 +23,6 @@ fn main() {
         .add_state::<AppState>()
         .add_plugin(UiPlugin)
         .add_plugin(MenuPlugin)
+        .add_plugin(GamePlugin)
         .run();
 }

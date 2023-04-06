@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 pub const TITLE_SIZE: f32 = 64.0;
 
-pub const FONT_MONO_BOLD: &str = "fonts\\FiraCode-Bold.ttf";
+pub const FONT_MONO_BOLD: &str = "fonts/FiraCode-Bold.ttf";
 
 pub fn get_title_style(server: &Res<AssetServer>) -> TextStyle {
     TextStyle {
