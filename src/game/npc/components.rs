@@ -1,22 +1,20 @@
 use bevy::prelude::*;
+use serde::Deserialize;
 
-#[derive(Component, Debug)]
+#[derive(Component, Debug, Deserialize)]
 pub struct Npc {
-    pub name: String,
     pub speed: u8,
     pub level: u8,
-    pub job: Job,
-    pub action: Action,
 }
 
-#[derive(States, Debug, Clone, Copy, Eq, PartialEq, Hash, Default)]
+#[derive(States, Debug, Clone, Copy, Eq, PartialEq, Hash, Default, Deserialize)]
 pub enum Job {
     #[default]
     Normal,
     Enemy,
 }
 
-#[derive(States, Debug, Clone, Copy, Eq, PartialEq, Hash, Default)]
+#[derive(States, Debug, Clone, Copy, Eq, PartialEq, Hash, Default, Deserialize)]
 pub enum Action {
     #[default]
     Idle,

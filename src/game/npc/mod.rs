@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::AppState;
+
 use self::systems::*;
 
 pub mod components;
@@ -9,6 +11,6 @@ pub struct NpcPlugin;
 
 impl Plugin for NpcPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(spawn_npc).add_system(get_npcs);
+        app.add_system(get_npcs.in_schedule(OnEnter(AppState::Menu)));
     }
 }
