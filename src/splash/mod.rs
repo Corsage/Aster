@@ -1,18 +1,24 @@
 use bevy::{asset::LoadState, prelude::*};
 
 use crate::{
-    utils::text_asset_loader::{DataAssets, TomlAsset, TomlLoader},
+    utils::text_asset_loader::{DataAssets, TomlAsset},
     AppState,
 };
+
+use self::systems::layout::*;
+
+mod components;
+mod styles;
+mod systems;
 
 pub struct SplashPlugin;
 
 impl Plugin for SplashPlugin {
     fn build(&self, app: &mut App) {
-        app.init_asset_loader::<TomlLoader>()
-            .add_asset::<TomlAsset>()
-            .init_resource::<AssetList>()
+        app.init_resource::<AssetList>()
             .add_startup_system(load_assets)
+            .add_system(spawn_splash.in_schedule(OnEnter(AppState::Splash)))
+            .add_system(despawn_splash.in_schedule(OnExit(AppState::Splash)))
             .add_system(check_asset_loading.in_set(OnUpdate(AppState::Splash)));
     }
 }

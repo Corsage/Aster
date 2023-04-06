@@ -1,19 +1,8 @@
 use bevy::{prelude::*, utils::HashMap};
 
-use crate::{
-    game::components::FacingDirection,
-    utils::text_asset_loader::{DataAssets, TomlAsset},
-};
+use crate::utils::text_asset_loader::{DataAssets, TomlAsset};
 
-use super::components::{Action, Job, Npc};
-
-pub fn spawn_npc(mut commands: Commands) {
-    let test = Npc {
-        speed: 1,
-        level: 10,
-    };
-    commands.spawn(test);
-}
+use super::components::Npc;
 
 pub fn get_npcs(toml_assets: Res<Assets<TomlAsset>>, data_assets: Res<DataAssets>) {
     // for npc in query.iter() {

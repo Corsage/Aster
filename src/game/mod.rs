@@ -7,8 +7,15 @@ pub mod npc;
 
 pub struct GamePlugin;
 
+#[derive(States, Debug, Clone, Copy, Eq, PartialEq, Hash, Default)]
+pub enum GameState {
+    #[default]
+    Running,
+    Paused,
+}
+
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugin(NpcPlugin);
+        app.add_state::<GameState>().add_plugin(NpcPlugin);
     }
 }
