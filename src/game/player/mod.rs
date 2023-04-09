@@ -2,7 +2,10 @@ use bevy::prelude::*;
 
 use crate::{utils::vectors::Vector2Int, AppState};
 
-use super::{map::components::Position, pieces::components::Piece};
+use super::{
+    map::components::Position,
+    pieces::components::{Actor, Piece},
+};
 
 pub struct PlayerPlugin;
 
@@ -17,6 +20,7 @@ pub struct Player;
 
 fn spawn_player(mut commands: Commands) {
     commands.spawn((
+        Actor::default(),
         Player,
         Piece {
             kind: "Player".to_string(),

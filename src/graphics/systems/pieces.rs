@@ -3,7 +3,8 @@ use bevy::prelude::*;
 use crate::{
     game::{map::components::Position, pieces::components::Piece},
     graphics::{
-        get_world_position, GraphicsAssets, PIECE_SPEED, PIECE_Z, POSITION_TOLERANCE, TILE_SIZE,
+        get_world_position, GraphicsAssets, GraphicsWaitEvent, PIECE_SPEED, PIECE_Z,
+        POSITION_TOLERANCE, TILE_SIZE,
     },
 };
 
@@ -35,7 +36,10 @@ pub fn spawn_piece_renderer(
 pub fn update_piece_position(
     mut query: Query<(&Position, &mut Transform), With<Piece>>,
     time: Res<Time>,
+    mut ev_wait: EventWriter<GraphicsWaitEvent>,
 ) {
+    let mut animating = false;
+
     for (position, mut transform) in query.iter_mut() {
         let target = get_world_position(&position, PIECE_Z);
         let d = (target - transform.translation).length();
@@ -43,8 +47,15 @@ pub fn update_piece_position(
             transform.translation = transform
                 .translation
                 .lerp(target, PIECE_SPEED * time.delta_seconds());
+
+            // We animate "long" distance travel.
+            animating = true;
         } else {
             transform.translation = target;
+        }
+
+        if animating {
+            ev_wait.send(GraphicsWaitEvent);
         }
     }
 }

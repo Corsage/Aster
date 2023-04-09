@@ -17,11 +17,14 @@ pub struct GraphicsAssets {
     pub sprite_texture: Handle<TextureAtlas>,
 }
 
+pub struct GraphicsWaitEvent;
+
 pub struct GraphicsPlugin;
 
 impl Plugin for GraphicsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(assets::load_assets)
+        app.add_event::<GraphicsWaitEvent>()
+            .add_startup_system(assets::load_assets)
             .add_system(tiles::spawn_tile_renderer)
             .add_system(pieces::spawn_piece_renderer)
             .add_system(pieces::update_piece_position);
