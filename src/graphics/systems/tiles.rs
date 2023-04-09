@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 use crate::{
     game::map::components::{Position, Tile},
-    graphics::{GraphicsAssets, TILE_SIZE},
+    graphics::{get_world_position, GraphicsAssets, TILE_SIZE, TILE_Z},
 };
 
 pub fn spawn_tile_renderer(
@@ -11,14 +11,10 @@ pub fn spawn_tile_renderer(
     assets: Res<GraphicsAssets>,
 ) {
     for (entity, position) in query.iter() {
-        let mut sprite = TextureAtlasSprite::new(122);
+        let mut sprite = TextureAtlasSprite::new(25);
         sprite.custom_size = Some(Vec2::splat(TILE_SIZE));
 
-        let v = Vec3::new(
-            TILE_SIZE * position.v.x as f32,
-            TILE_SIZE * position.v.y as f32,
-            0.,
-        );
+        let v = get_world_position(&position, TILE_Z);
 
         commands.entity(entity).insert(SpriteSheetBundle {
             sprite,

@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use game::GamePlugin;
 use graphics::{GraphicsPlugin, TILE_SIZE};
+use input::InputPlugin;
 use menu::MenuPlugin;
 use splash::SplashPlugin;
 use ui::UiPlugin;
@@ -8,6 +9,7 @@ use utils::UtilsPlugin;
 
 pub mod game;
 mod graphics;
+mod input;
 mod menu;
 mod splash;
 mod ui;
@@ -35,11 +37,14 @@ fn main() {
         .add_plugin(UtilsPlugin)
         // UI.
         .add_plugin(UiPlugin)
-        // Splash screen.
+        // Splash screen -- load base assets here.
         .add_plugin(SplashPlugin)
         .add_plugin(MenuPlugin)
         .add_plugin(GamePlugin)
+        // Controls all the graphics.
         .add_plugin(GraphicsPlugin)
+        // Controls all the inputs.
+        .add_plugin(InputPlugin)
         .add_startup_system(setup)
         .run();
 }
