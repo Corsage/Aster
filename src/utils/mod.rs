@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use self::text_asset_loader::{TomlAsset, TomlLoader};
 
 pub mod text_asset_loader;
+pub mod vectors;
 
 pub struct UtilsPlugin;
 

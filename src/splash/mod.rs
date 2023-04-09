@@ -54,7 +54,7 @@ pub fn check_asset_loading(
     match server.get_group_load_state(assets.0.iter().map(|a| a.id())) {
         LoadState::Loaded => {
             info!("Loaded {} assets.", assets.0.len());
-            next_state.set(AppState::Menu);
+            next_state.set(AppState::Game); // Should be Menu.
         }
         LoadState::Failed => {
             error!("Failed to load assets.");
